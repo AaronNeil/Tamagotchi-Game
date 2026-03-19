@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cpkgrekke43lo"]
+
+[ext_resource type="Script" uid="uid://ljo8ii2jawno" path="res://scripts/main.gd" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://cf81jqwdlpol4" path="res://scenes/farm.tscn" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://d4fht0tmjwu0f" path="res://assets/Characters/ja.blend" id="3_sugp2"]
+
+[node name="Main" type="Node3D" unique_id=527905364]
+script = ExtResource("1_o5qli")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1638808105]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1666504011]
+
+[node name="LowPolyFarm" parent="." unique_id=1326348120 instance=ExtResource("2_0wfyh")]
+
+[node name="Tomato" parent="." unique_id=793771308 instance=ExtResource("3_sugp2")]
+visible = false

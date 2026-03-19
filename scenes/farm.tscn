@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cf81jqwdlpol4"]
+
+[ext_resource type="PackedScene" uid="uid://pj71g8x4k2f" path="res://assets/Map/LowPolyFarm.blend" id="1_o03py"]
+
+[node name="LowPolyFarm" unique_id=1326348120 instance=ExtResource("1_o03py")]
