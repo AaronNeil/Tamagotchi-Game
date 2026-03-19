@@ -14,6 +14,10 @@ config/name="tamagotchi-game"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
+[filesystem]
+
+import/blender/enabled.android=true
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
