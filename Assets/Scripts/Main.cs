@@ -49,12 +49,19 @@ public class Main : MonoBehaviour {
     void Start() {
         Debug.Log("Main started");
         water = 50f;
-        health = 100f;
+        health = 50f;
         happiness = 50f;
         coins = 0;
         fertilizerAmount = 1;
         fertilizerCooldown = 0f;
         isHealthDraining = false;
+        WaterButton.onClick.AddListener(uiSystem.waterButtonClicked);
+        FertilizerButton.onClick.AddListener(uiSystem.fertilizerButtonClicked);
+        ShopButton.onClick.AddListener(uiSystem.shopButtonClicked);
+        // Click shop
+
+        Debug.Log("Main done");
+
     }
 
     // Update is called once per frame
@@ -81,10 +88,14 @@ public class Main : MonoBehaviour {
             Debug.Log("Water - 3");
             water = Mathf.Clamp(water - 3f, 0, maxWater);
         }
+        
+        // Happiness logic
         if (happinessDrainTimer >= 1f){
             happinessDrainTimer = 0f;
             if (isHealthDraining) {
                 happiness = Mathf.Clamp(happiness - 5f, 0, maxHappiness);
+            } else {
+                happiness = Mathf.Clamp(happiness + 3f, 0, maxHappiness);
             }
         }
 
@@ -110,7 +121,6 @@ public class Main : MonoBehaviour {
             fertilizerAmount = Mathf.Clamp(fertilizerAmount - 1, 0, maxFertilizer);
             fertilizerCooldown = 30f;
         }
-
     }
 
     public void buyFertilizer() {

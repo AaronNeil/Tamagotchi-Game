@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class UISystem : MonoBehaviour
 {
+    [Header("Linked Main")]
+    public Main main;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,4 +31,15 @@ public class UISystem : MonoBehaviour
 
     // Button click event
 
+    public void waterButtonClicked(){
+        main.waterPlant();
+    }
+
+    public void fertilizerButtonClicked(){
+        main.fertilizePlant(); 
+    }
+
+    public void shopButtonClicked(){
+        main.buyFertilizer();
+    }
 }
