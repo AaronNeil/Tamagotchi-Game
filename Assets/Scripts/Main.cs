@@ -4,24 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Main : MonoBehaviour {
+public class Main : MonoBehaviour
+{
 
     [Header("Linked UI")]
     public UISystem uiSystem;
-
-    // UI stats
-    public Image WaterStatusFill;
-    public Image HealthStatusFill;
-    public Image HappinessStatusFill;
 
     // Buttons
     public Button WaterButton;
     public Button FertilizerButton;
     public Button ShopButton;
-
-    // Text Box
-    public TextMeshProUGUI CoinAmountText;
-    public TextMeshProUGUI FertilizerAmountText;
 
     // Max values
     public float maxWater = 100f;
@@ -30,7 +22,7 @@ public class Main : MonoBehaviour {
     public int maxCoins = 999;
     public int maxFertilizer = 99;
     public int fertilizerCost = 5;
-    
+
     // Current Values
     public float water;
     public float health;
@@ -38,15 +30,16 @@ public class Main : MonoBehaviour {
     public int coins;
     public int fertilizerAmount;
     public bool isHealthDraining;
-    
+
     // Timers
     public float timer;
     public float happinessDrainTimer;
     public float fertilizerCooldown;
-    
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start() {
+    void Start()
+    {
         Debug.Log("Main started");
         water = 50f;
         health = 50f;
@@ -65,68 +58,58 @@ public class Main : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         Debug.Log("Main updated");
         timer += Time.deltaTime;
         happinessDrainTimer += Time.deltaTime;
-        
-        if (fertilizerCooldown > 0f){
+
+        if (fertilizerCooldown > 0f)
+        {
             fertilizerCooldown -= Time.deltaTime;
         }
 
-        if (timer >= 2f) {
+        if (timer >= 2f)
+        {
             timer = 0f;
-            if (!isHealthDraining && happiness >= 75) {
+            if (!isHealthDraining && happiness >= 75)
+            {
                 coins = Mathf.Clamp(coins + 1, 0, maxCoins);
             }
-            if  (water == 0f) {
+            if (water == 0f)
+            {
                 isHealthDraining = true;
                 health = Mathf.Clamp(health - 3f, 0, maxHealth);
-            } else {
+            }
+            else
+            {
                 health = Mathf.Clamp(health + 1f, 0, maxHealth);
             }
             Debug.Log("Water - 3");
             water = Mathf.Clamp(water - 3f, 0, maxWater);
         }
-        
+
         // Happiness logic
-        if (happinessDrainTimer >= 1f){
+        if (happinessDrainTimer >= 1f)
+        {
             happinessDrainTimer = 0f;
-            if (isHealthDraining) {
+            if (isHealthDraining)
+            {
                 happiness = Mathf.Clamp(happiness - 5f, 0, maxHappiness);
-            } else {
+            }
+            else
+            {
                 happiness = Mathf.Clamp(happiness + 3f, 0, maxHappiness);
             }
         }
 
         // Apply changes to UI
-        if (uiSystem != null){
-            uiSystem.updateStatusFill(WaterStatusFill, water, maxWater);
-            uiSystem.updateStatusFill(HealthStatusFill, health, maxHealth);
-            uiSystem.updateStatusFill(HappinessStatusFill, happiness, maxHappiness);
-            uiSystem.updateTextBox(CoinAmountText, coins);
-            uiSystem.updateTextBox(FertilizerAmountText, fertilizerAmount);
-        }
-    }
+        if (uiSystem != null)
+        {
+            uiSystem.updateStatusFill();
+            uiSystem.updateTextBox();
+            uiSystem.updateHappinessImage();
 
-
-    public void waterPlant() {
-        water = maxWater;
-        isHealthDraining = false;
-    }
-
-    public void fertilizePlant() {
-        if (fertilizerCooldown <= 0f && fertilizerAmount >= 1){
-            health = Mathf.Clamp(health + 10f, 0, maxHealth);
-            fertilizerAmount = Mathf.Clamp(fertilizerAmount - 1, 0, maxFertilizer);
-            fertilizerCooldown = 30f;
-        }
-    }
-
-    public void buyFertilizer() {
-        if (coins >= fertilizerCost){
-            coins = Mathf.Clamp(coins - fertilizerCost, 0, maxCoins);
-            fertilizerAmount = Mathf.Clamp(fertilizerAmount + 1, 0, maxFertilizer);
         }
     }
 }
